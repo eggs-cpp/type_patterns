@@ -15,6 +15,7 @@
 #include <eggs/type_patterns/match.hpp>
 #include <eggs/type_patterns/metafunction.hpp>
 #include <eggs/type_patterns/placeholders.hpp>
+#include <eggs/type_patterns/replace.hpp>
 
 #include <eggs/type_patterns/algorithm/all_of.hpp>
 #include <eggs/type_patterns/algorithm/any_of.hpp>
