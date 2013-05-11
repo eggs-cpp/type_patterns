@@ -12,6 +12,8 @@
 #ifndef EGGS_TYPE_PATTERNS_DETAIL_MATCH_HPP
 #define EGGS_TYPE_PATTERNS_DETAIL_MATCH_HPP
 
+#include <eggs/type_patterns/detail/match_bool.hpp>
+
 #include <eggs/type_patterns/metafunction.hpp>
 #include <eggs/type_patterns/placeholders.hpp>
 
@@ -28,19 +30,6 @@
 #include <boost/utility/enable_if.hpp>
 
 namespace eggs { namespace type_patterns { namespace detail {
-
-    template< typename State >
-    struct match_false
-      : boost::mpl::false_
-    {
-        typedef boost::mpl::map<> state;
-    };
-    template< typename State >
-    struct match_true
-      : boost::mpl::true_
-    {
-        typedef State state;
-    };
 
     template< typename ...T > struct linear;
 
@@ -87,14 +76,13 @@ namespace eggs { namespace type_patterns { namespace detail {
       , typename boost::enable_if_c<
             P != 0 && boost::mpl::has_key< S, placeholder< P > >::type::value
         >::type
-    > : boost::mpl::if_<
+    > : match_bool<
             boost::is_same<
                 typename boost::mpl::at< S, placeholder< P > >::type
               , T
             >
-          , match_true< S >
-          , match_false< S >
-        >::type
+          , S
+        >
     {};
 
     // cv-qualifiers

@@ -20,38 +20,26 @@
 #include <boost/mpl/insert.hpp>
 #include <boost/mpl/pair.hpp>
 
-#include <boost/utility/enable_if.hpp>
-
 namespace eggs { namespace type_patterns {
     
     template< typename Placeholder, typename Pattern >
     struct as;
-    
-    template< int I, typename P, typename T, typename S >
-    struct call<
-        as< placeholder< I >, P >, T, S
-      , typename boost::enable_if<
-            detail::match< P, T, S >
-        >::type
-    > : detail::match_true<
-            typename boost::mpl::insert<
-                S
-              , boost::mpl::pair< placeholder< I >, T >
-            >::type
-        >
-    {};
-    template< int I, typename P, typename T, typename S >
-    struct call<
-        as< placeholder< I >, P >, T, S
-      , typename boost::disable_if<
-            detail::match< P, T, S >
-        >::type
-    > : detail::match_false< S >
-    {};
 
     template<>
     struct is_metafunction< as >
       : boost::mpl::true_
+    {};
+
+    template< int I, typename P, typename T, typename S >
+    struct call<
+        as< placeholder< I >, P >, T, S
+    > : detail::match_bool<
+            detail::match< P, T, S >
+          , typename boost::mpl::insert<
+                S
+              , boost::mpl::pair< placeholder< I >, T >
+            >::type
+        >
     {};
 
 } } // namespace eggs::type_patterns

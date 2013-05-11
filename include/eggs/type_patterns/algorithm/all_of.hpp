@@ -16,12 +16,17 @@
 
 #include <eggs/type_patterns/metafunction.hpp>
 
-#include <boost/utility/enable_if.hpp>
+#include <boost/mpl/if.hpp>
 
 namespace eggs { namespace type_patterns {
 
     template< typename ...Patterns >
     struct all_of;
+
+    template<>
+    struct is_metafunction< all_of >
+      : boost::mpl::true_
+    {};
 
     template< typename T, typename S >
     struct call<
@@ -31,23 +36,11 @@ namespace eggs { namespace type_patterns {
     template< typename P, typename ...PT, typename T, typename S >
     struct call<
         all_of< P, PT... >, T, S
-      , typename boost::enable_if<
+    > : boost::mpl::if_<
             detail::match< P, T, S >
+          , call< all_of< PT... >, T, S >
+          , detail::match_false< S >
         >::type
-    > : call< all_of< PT... >, T, S >
-    {};
-    template< typename P, typename ...PT, typename T, typename S >
-    struct call<
-        all_of< P, PT... >, T, S
-      , typename boost::disable_if<
-            detail::match< P, T, S >
-        >::type
-    > : detail::match_false< S >
-    {};
-
-    template<>
-    struct is_metafunction< all_of >
-      : boost::mpl::true_
     {};
 
 } } // namespace eggs::type_patterns

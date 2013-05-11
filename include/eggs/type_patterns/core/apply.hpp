@@ -26,6 +26,11 @@ namespace eggs { namespace type_patterns {
     template< typename Predicate >
     struct apply;
 
+    template<>
+    struct is_metafunction< apply >
+      : boost::mpl::true_
+    {};
+
     namespace detail {
 
         template< typename P, typename T, typename S >
@@ -47,16 +52,10 @@ namespace eggs { namespace type_patterns {
     template< template< typename... > class F, typename ...FP, typename T, typename S >
     struct call<
         apply< F< FP... > >, T, S
-    > : boost::mpl::if_<
+    > : detail::match_bool<
             F< typename detail::apply_eval< FP, T, S >::type... >
-          , detail::match_true< S >
-          , detail::match_false< S >
-        >::type
-    {};
-
-    template<>
-    struct is_metafunction< apply >
-      : boost::mpl::true_
+          , S
+        >
     {};
 
 } } // namespace eggs::type_patterns

@@ -57,6 +57,9 @@
     <ClInclude Include="..\include\eggs\type_patterns\core\as.hpp">
       <Filter>eggs\type_patterns\core</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\eggs\type_patterns\detail\match_bool.hpp">
+      <Filter>eggs\type_patterns\detail</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\LICENSE_1_0.txt" />

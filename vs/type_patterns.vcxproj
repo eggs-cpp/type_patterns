@@ -88,6 +88,7 @@
     <ClInclude Include="..\include\eggs\type_patterns\core\apply.hpp" />
     <ClInclude Include="..\include\eggs\type_patterns\core\as.hpp" />
     <ClInclude Include="..\include\eggs\type_patterns\detail\match.hpp" />
+    <ClInclude Include="..\include\eggs\type_patterns\detail\match_bool.hpp" />
     <ClInclude Include="..\include\eggs\type_patterns\match.hpp" />
     <ClInclude Include="..\include\eggs\type_patterns\metafunction.hpp" />
     <ClInclude Include="..\include\eggs\type_patterns\placeholders.hpp" />
