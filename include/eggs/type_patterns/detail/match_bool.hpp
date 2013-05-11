@@ -42,8 +42,8 @@ namespace eggs { namespace type_patterns { namespace detail {
     struct match_bool
       : boost::mpl::if_<
             Bool
-          , match_false< State >
           , match_true< State >
+          , match_false< State >
         >::type
     {};
 
