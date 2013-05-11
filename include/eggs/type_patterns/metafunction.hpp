@@ -21,8 +21,12 @@ namespace eggs { namespace type_patterns {
       : boost::mpl::false_
     {};
 
-    template< typename ...T >
-    struct params;
+    template<
+        typename Metafunction
+      , typename Type, typename State
+      , typename Enable = void
+    >
+    struct call;
 
 } } // namespace eggs::type_patterns
 

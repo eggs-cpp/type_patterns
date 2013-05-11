@@ -17,6 +17,9 @@
     <Filter Include="eggs\type_patterns\algorithm">
       <UniqueIdentifier>{2be20d98-c4be-464a-8e3e-f9941c9d698d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="eggs\type_patterns\core">
+      <UniqueIdentifier>{bc62cfb2-2a95-48e3-a086-36110d5c7120}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\main.cpp">
@@ -48,5 +51,17 @@
     <ClInclude Include="..\include\eggs\type_patterns\algorithm\all_of.hpp">
       <Filter>eggs\type_patterns\algorithm</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\eggs\type_patterns\core\apply.hpp">
+      <Filter>eggs\type_patterns\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\eggs\type_patterns\core\as.hpp">
+      <Filter>eggs\type_patterns\core</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\LICENSE_1_0.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\README.md" />
   </ItemGroup>
 </Project>

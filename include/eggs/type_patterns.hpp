@@ -20,4 +20,8 @@
 #include <eggs/type_patterns/algorithm/any_of.hpp>
 #include <eggs/type_patterns/algorithm/none_of.hpp>
 
+#include <eggs/type_patterns/core/apply.hpp>
+#include <eggs/type_patterns/core/as.hpp>
+#include <eggs/type_patterns/core/ignore_cv.hpp>
+
 #endif /*EGGS_TYPE_PATTERNS_HPP*/

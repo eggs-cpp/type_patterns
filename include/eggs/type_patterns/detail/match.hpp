@@ -195,7 +195,7 @@ namespace eggs { namespace type_patterns { namespace detail {
       , typename boost::enable_if<
             is_metafunction< P >
         >::type
-    > : P< params< PA... >, T, S >
+    > : call< P< PA... >, T, S >
     {};
     template< template< typename... > class U, typename ...P, typename ...T, typename S >
     struct match_template<

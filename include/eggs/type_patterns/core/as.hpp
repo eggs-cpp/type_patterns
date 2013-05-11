@@ -1,5 +1,5 @@
 /**
- * Eggs.TypePatterns <eggs/type_patterns/algorithm/all_of.hpp>
+ * Eggs.TypePatterns <eggs/type_patterns/core/as.hpp>
  * 
  * Copyright Agustín Bergé, Fusion Fenix 2013
  * 
@@ -9,36 +9,40 @@
  * Library home page: https://github.com/eggs-cpp/type_patterns
  */
 
-#ifndef EGGS_TYPE_PATTERNS_ALGORITHM_ALL_OF_HPP
-#define EGGS_TYPE_PATTERNS_ALGORITHM_ALL_OF_HPP
+#ifndef EGGS_TYPE_PATTERNS_CORE_AS_HPP
+#define EGGS_TYPE_PATTERNS_CORE_AS_HPP
 
 #include <eggs/type_patterns/detail/match.hpp>
 
 #include <eggs/type_patterns/metafunction.hpp>
+#include <eggs/type_patterns/placeholders.hpp>
+
+#include <boost/mpl/insert.hpp>
+#include <boost/mpl/pair.hpp>
 
 #include <boost/utility/enable_if.hpp>
 
 namespace eggs { namespace type_patterns {
-
-    template< typename ...Patterns >
-    struct all_of;
-
-    template< typename T, typename S >
+    
+    template< typename Placeholder, typename Pattern >
+    struct as;
+    
+    template< int I, typename P, typename T, typename S >
     struct call<
-        all_of<>, T, S
-    > : detail::match_true< S >
-    {};
-    template< typename P, typename ...PT, typename T, typename S >
-    struct call<
-        all_of< P, PT... >, T, S
+        as< placeholder< I >, P >, T, S
       , typename boost::enable_if<
             detail::match< P, T, S >
         >::type
-    > : call< all_of< PT... >, T, S >
+    > : detail::match_true<
+            typename boost::mpl::insert<
+                S
+              , boost::mpl::pair< placeholder< I >, T >
+            >::type
+        >
     {};
-    template< typename P, typename ...PT, typename T, typename S >
+    template< int I, typename P, typename T, typename S >
     struct call<
-        all_of< P, PT... >, T, S
+        as< placeholder< I >, P >, T, S
       , typename boost::disable_if<
             detail::match< P, T, S >
         >::type
@@ -46,10 +50,10 @@ namespace eggs { namespace type_patterns {
     {};
 
     template<>
-    struct is_metafunction< all_of >
+    struct is_metafunction< as >
       : boost::mpl::true_
     {};
 
 } } // namespace eggs::type_patterns
 
-#endif /*EGGS_TYPE_PATTERNS_ALGORITHM_ALL_OF_HPP*/
+#endif /*EGGS_TYPE_PATTERNS_CORE_AS_HPP*/

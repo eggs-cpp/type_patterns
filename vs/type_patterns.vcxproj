@@ -85,10 +85,18 @@
     <ClInclude Include="..\include\eggs\type_patterns\algorithm\all_of.hpp" />
     <ClInclude Include="..\include\eggs\type_patterns\algorithm\any_of.hpp" />
     <ClInclude Include="..\include\eggs\type_patterns\algorithm\none_of.hpp" />
+    <ClInclude Include="..\include\eggs\type_patterns\core\apply.hpp" />
+    <ClInclude Include="..\include\eggs\type_patterns\core\as.hpp" />
     <ClInclude Include="..\include\eggs\type_patterns\detail\match.hpp" />
     <ClInclude Include="..\include\eggs\type_patterns\match.hpp" />
     <ClInclude Include="..\include\eggs\type_patterns\metafunction.hpp" />
     <ClInclude Include="..\include\eggs\type_patterns\placeholders.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\LICENSE_1_0.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\README.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

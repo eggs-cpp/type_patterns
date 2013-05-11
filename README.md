@@ -67,7 +67,25 @@ usable to match functions or templates with any number of trailing arguments.
 _Metafunctions_ allow you to extend the matching functionality beyond 
 the syntax of **C++** types.
 
-  (...)
+  - `apply< Predicate >` matches a type when evaluating the _predicate_ for 
+said type results in a true type. In this context, `_` resolves to the type 
+being matched and `_1` .. `_9` resolve to already matched capture 
+placeholders.
+
+  - `as< Placeholder, Pattern >` performs a _pattern_ match against the 
+type, and it captures it in the given capture _placeholder_ when it does match.
+
+  - `ignore_const< Pattern >`, `ignore_volatile< Pattern >`, `ignore_cv< Pattern >` 
+perform a _pattern_ match that ignores `const` and/or `volatile` qualifiers.
+
+  - `all_of< ...Patterns >` matches a type when said type matches against 
+**all** of its _patterns_.
+
+  - `any_of< ...Patterns >` matches a type when said type matches against 
+**any** of its _patterns_.
+
+  - `none_of< ...Patterns >` matches a type when said type matches against
+**none** of its _patterns_.
 
 ---
 
