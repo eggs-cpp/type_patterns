@@ -124,16 +124,19 @@ namespace eggs { namespace type_patterns { namespace detail {
 
     // arrays
     template< typename P, typename T, typename S >
-    struct match< P[], T[], S >
-      : match< P, T, S >
+    struct match<
+        P[], T[], S
+    > : match< P, T, S >
     {};
     template< typename P, typename T, int Size, typename S >
-    struct match< P[ Size ], T[ Size ], S >
-      : match< P, T, S >
+    struct match<
+        P[ Size ], T[ Size ], S
+    > : match< P, T, S >
     {};
     template< typename P, typename T, int Size, typename S >
-    struct match< P[ N ], T[ Size ], S >
-      : match< P, T, S >
+    struct match<
+        P[ N ], T[ Size ], S
+    > : match< P, T, S >
     {};
 
     // functions
@@ -144,8 +147,13 @@ namespace eggs { namespace type_patterns { namespace detail {
     {};
     template< typename PR, typename ...PA, typename TR, typename ...TA, typename S >
     struct match<
+        PR( PA... ), TR( TA..., ... ), S
+    > : match< linear< PR, PA... >, linear< TR, TA..., ellipsis >, S >
+    {};
+    template< typename PR, typename ...PA, typename TR, typename ...TA, typename S >
+    struct match<
         PR( PA..., ... ), TR( TA..., ... ), S
-    > : match< linear< PR, PA... >, linear< TR, TA... >, S >
+    > : match< linear< PR, PA..., ellipsis >, linear< TR, TA..., ellipsis >, S >
     {};
 
     // templates

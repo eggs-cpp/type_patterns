@@ -39,9 +39,11 @@ namespace eggs { namespace type_patterns {
 
 #       undef EGGS_TYPE_PATTERNS_decl_placeholder
 
+        static int const N = INT_MAX;
+
         struct varargs {};
 
-        static int const N = INT_MAX;
+        struct ellipsis {};
 
     } // namespace placeholders
 
