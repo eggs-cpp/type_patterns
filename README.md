@@ -24,27 +24,27 @@ _pattern_. Use _placeholders_ to build more complex _patterns_. Example:
     using namespace eggs::type_patterns;
 
     template< typename T >
-    struct is_member_object_pointer
+    struct is_member_pointer
       : match< T, _1 _2::* > //~> Pattern: _1 _2::*
     {
         typedef typename at<
-                is_member_object_pointer, _
+                is_member_pointer, _
             >::type type; //~> type matched, T
         typedef typename at<
-                is_member_object_pointer, _1
+                is_member_pointer, _1
             >::type object_type; //~> type that matched _1
         typedef typename at<
-                is_member_object_pointer, _2
+                is_member_pointer, _2
             >::type class_type; //~> type that matched _2
     };
 
     struct X { int foo; };
 
     static_assert(
-        is_member_object_pointer< decltype(&X::foo) >::value
+        is_member_pointer< decltype(&X::foo) >::value
       , "oops! &X::foo should be a member object pointer" );
     static_assert(
-        !is_member_object_pointer< decltype(X::foo) >::value
+        !is_member_pointer< decltype(X::foo) >::value
       , "oops! X::foo should be an int" );
 
 ### Placeholders ###

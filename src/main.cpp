@@ -14,17 +14,17 @@
 using namespace eggs::type_patterns;
 
 template< typename T >
-struct is_member_object_pointer
+struct is_member_pointer
   : match< T, _1 _2::* >
 {
     typedef typename at<
-            is_member_object_pointer, _
+            is_member_pointer, _
         >::type type;
     typedef typename at<
-            is_member_object_pointer, _1
+            is_member_pointer, _1
         >::type object_type;
     typedef typename at<
-            is_member_object_pointer, _2
+            is_member_pointer, _2
         >::type class_type;
 };
 
@@ -38,10 +38,10 @@ struct X
 
 int main()
 {
-    typedef is_member_object_pointer< decltype(&X::foo) > traits;
+    typedef is_member_pointer< decltype(&X::foo) > traits;
     
     std::cout
-     << "is_member_object_pointer: " << std::boolalpha << traits() << "\n"
+     << "is_member_pointer: " << std::boolalpha << traits() << "\n"
      << "  class_type: " << typeid(traits::class_type).name() << "\n"
      << "  object_type: " << typeid(traits::object_type).name() << "\n"
      << std::endl;
