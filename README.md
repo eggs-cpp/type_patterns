@@ -42,7 +42,7 @@ _pattern_. Use _placeholders_ to build more complex _patterns_. Example:
 
     static_assert(
         is_member_pointer< decltype(&X::foo) >::value
-      , "oops! &X::foo should be a member object pointer" );
+      , "oops! &X::foo should be a member pointer" );
     static_assert(
         !is_member_pointer< decltype(X::foo) >::value
       , "oops! X::foo should be an int" );
@@ -80,6 +80,9 @@ _pattern_.
 
   - `ignore_const< Pattern >`, `ignore_volatile< Pattern >`, `ignore_cv< Pattern >` 
 perform a _pattern_ match that ignores `const` and/or `volatile` qualifiers.
+
+  - `ignore_signed< Pattern >`, `ignore_unsigned< Pattern >`, `ignore_sign< Pattern >` 
+perform a _pattern_ match that ignores `signed` and/or `unsigned` qualifiers.
 
   - `all_of< ...Patterns >` matches a type when said type matches against 
 **all** of its _patterns_.

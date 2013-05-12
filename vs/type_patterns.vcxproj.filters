@@ -25,6 +25,9 @@
     <ClCompile Include="..\src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\example\type_traits.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\eggs\type_patterns.hpp">
@@ -73,6 +76,9 @@
       <Filter>eggs\type_patterns\core</Filter>
     </ClInclude>
     <ClInclude Include="..\include\eggs\type_patterns\core\not.hpp">
+      <Filter>eggs\type_patterns\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\eggs\type_patterns\core\ignore_sign.hpp">
       <Filter>eggs\type_patterns\core</Filter>
     </ClInclude>
   </ItemGroup>

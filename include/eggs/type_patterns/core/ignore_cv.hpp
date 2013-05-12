@@ -15,12 +15,6 @@
 #include <eggs/type_patterns/detail/match.hpp>
 
 #include <eggs/type_patterns/metafunction.hpp>
-#include <eggs/type_patterns/placeholders.hpp>
-
-#include <boost/mpl/insert.hpp>
-#include <boost/mpl/pair.hpp>
-
-#include <boost/utility/enable_if.hpp>
 
 namespace eggs { namespace type_patterns {
     

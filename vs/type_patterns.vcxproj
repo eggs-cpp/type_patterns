@@ -78,6 +78,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\example\type_traits.cpp" />
     <ClCompile Include="..\src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -88,6 +89,7 @@
     <ClInclude Include="..\include\eggs\type_patterns\core\apply.hpp" />
     <ClInclude Include="..\include\eggs\type_patterns\core\as.hpp" />
     <ClInclude Include="..\include\eggs\type_patterns\core\ignore_cv.hpp" />
+    <ClInclude Include="..\include\eggs\type_patterns\core\ignore_sign.hpp" />
     <ClInclude Include="..\include\eggs\type_patterns\core\not.hpp" />
     <ClInclude Include="..\include\eggs\type_patterns\detail\match.hpp" />
     <ClInclude Include="..\include\eggs\type_patterns\detail\match_bool.hpp" />
