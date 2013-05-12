@@ -69,6 +69,12 @@
     <ClInclude Include="..\include\eggs\type_patterns\detail\replace_type.hpp">
       <Filter>eggs\type_patterns\detail</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\eggs\type_patterns\core\ignore_cv.hpp">
+      <Filter>eggs\type_patterns\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\eggs\type_patterns\core\not.hpp">
+      <Filter>eggs\type_patterns\core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\LICENSE_1_0.txt" />

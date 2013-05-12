@@ -75,6 +75,9 @@ placeholders.
   - `as< Placeholder, Pattern >` performs a _pattern_ match against the 
 type, and it captures it in the given capture _placeholder_ when it does match.
 
+  - `not_< Pattern >` matches a type that does **not** match the given 
+_pattern_.
+
   - `ignore_const< Pattern >`, `ignore_volatile< Pattern >`, `ignore_cv< Pattern >` 
 perform a _pattern_ match that ignores `const` and/or `volatile` qualifiers.
 

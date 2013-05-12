@@ -24,5 +24,6 @@
 #include <eggs/type_patterns/core/apply.hpp>
 #include <eggs/type_patterns/core/as.hpp>
 #include <eggs/type_patterns/core/ignore_cv.hpp>
+#include <eggs/type_patterns/core/not.hpp>
 
 #endif /*EGGS_TYPE_PATTERNS_HPP*/
