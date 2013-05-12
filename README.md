@@ -1,17 +1,66 @@
 `Eggs.TypePatterns`
 ==============
 
+# Introduction #
+
 `Eggs.TypePatterns` is pattern matching for types. It uses a terse syntax 
 to check for multiple type traits, and extract components of compound types.
 
-The library makes extensive use of the _C++ Standard Library_ as well as the 
-[_Boost C++ Libraries_][boost].
+The library is loosely based on [_Boost.Proto_][boost.proto] pattern matching 
+for _proto expression grammars_. It makes extensive use of the _C++ Standard 
+Library_ as well as the [_Boost C++ Libraries_][boost].
 
 The library is in its early development stages, and currently provides no 
 examples, tests nor documentation. Its use in a production environment is not 
 recommended at the time.
 
 [boost]: http://boost.org/ "Boost C++ Libraries"
+[boost.proto]: http://www.boost.org/doc/libs/release/libs/proto/ "Boost.Proto"
+
+# Motivation #
+
+Given a type `T`, we need to check whether is a _pointer-to-const `U`_ and if 
+so we have to find the type `U`.
+
+Using the _type traits_ components from the **C++11** standard library, we 
+could do:
+
+    using namespace std;
+
+    bool matches =
+      conditional<
+        is_pointer< T >::value,
+        is_const< typename remove_pointer< T >::type >,
+        false_type
+      >::type::value;
+
+    typedef typename remove_const<
+      typename remove_pointer< T >::type
+    >::type U;
+
+With the addition of _transformation traits redux_ to **C++14**, we can get 
+ride of those `typename`s:
+
+    using namespace std;
+
+    bool matches =
+      conditional_t<
+        is_pointer< T >::value,
+        is_const< remove_pointer_t< T > >,
+        false_type
+      >::value;
+
+    typedef remove_const_t<
+      remove_pointer_t< T >
+    > U;
+
+Using _TypePatterns_, we get a more expressive solution:
+
+    using namespace eggs::type_patterns;
+
+    bool matches = match< T, _1 const* >::value;
+
+    typedef typename at< match< T, _1 const* >, _1 >::type U;
 
 # Basic usage #
 

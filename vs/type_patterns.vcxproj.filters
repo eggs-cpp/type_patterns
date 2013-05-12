@@ -20,13 +20,16 @@
     <Filter Include="eggs\type_patterns\core">
       <UniqueIdentifier>{bc62cfb2-2a95-48e3-a086-36110d5c7120}</UniqueIdentifier>
     </Filter>
+    <Filter Include="examples">
+      <UniqueIdentifier>{0eb5b753-3b57-47b9-a1c0-f4ab9b70e312}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\example\type_traits.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>examples</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
