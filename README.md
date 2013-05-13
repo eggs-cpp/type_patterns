@@ -19,8 +19,8 @@ recommended at the time.
 
 # Motivation #
 
-Given a type `T`, we need to check whether is a _pointer-to-const `U`_ and if 
-so we have to find the type `U`.
+Given a type `T`, we need to check whether it is a _pointer-to-const `U`_ and 
+if so we have to find the type `U`.
 
 Using the _type traits_ components from the **C++11** standard library, we 
 could do:
@@ -28,11 +28,8 @@ could do:
     using namespace std;
 
     bool matches =
-      conditional<
-        is_pointer< T >::value,
-        is_const< typename remove_pointer< T >::type >,
-        false_type
-      >::type::value;
+      is_pointer< T >::value && 
+      is_const< typename remove_pointer< T >::type >::value;
 
     typedef typename remove_const<
       typename remove_pointer< T >::type
@@ -44,11 +41,8 @@ ride of those `typename`s:
     using namespace std;
 
     bool matches =
-      conditional_t<
-        is_pointer< T >::value,
-        is_const< remove_pointer_t< T > >,
-        false_type
-      >::value;
+      is_pointer< T >::value &&
+      is_const< remove_pointer_t< T > >::value;
 
     typedef remove_const_t<
       remove_pointer_t< T >
@@ -67,7 +61,7 @@ Using _TypePatterns_, we get a more expressive solution:
 ## Main components ##
 
 Use the `match` template metafunction to match a type against a given 
-_pattern_. Use _placeholders_ to build more complex _patterns_. Example:
+_pattern_. Use _placeholders_ to build more complex _patterns_. _[ Example:_
 
     #include <eggs/type_patterns.hpp>
     using namespace eggs::type_patterns;
@@ -81,7 +75,7 @@ _pattern_. Use _placeholders_ to build more complex _patterns_. Example:
             >::type type; //~> type matched, T
         typedef typename at<
                 is_member_pointer, _1
-            >::type object_type; //~> type that matched _1
+            >::type member_type; //~> type that matched _1
         typedef typename at<
                 is_member_pointer, _2
             >::type class_type; //~> type that matched _2
@@ -95,6 +89,8 @@ _pattern_. Use _placeholders_ to build more complex _patterns_. Example:
     static_assert(
         !is_member_pointer< decltype(X::foo) >::value
       , "oops! X::foo should be an int" );
+
+_—end example ]_
 
 ### Placeholders ###
 
@@ -131,16 +127,16 @@ _pattern_.
 perform a _pattern_ match that ignores `const` and/or `volatile` qualifiers.
 
   - `ignore_signed< Pattern >`, `ignore_unsigned< Pattern >`, `ignore_sign< Pattern >` 
-perform a _pattern_ match that ignores `signed` and/or `unsigned` qualifiers.
+perform a _pattern_ match that ignores `signed` and/or `unsigned` modifiers.
 
-  - `all_of< ...Patterns >` matches a type when said type matches against 
-**all** of its _patterns_.
+  - `all_of< ...Patterns >` matches a type that matches **all** of the 
+_patterns_.
 
-  - `any_of< ...Patterns >` matches a type when said type matches against 
-**any** of its _patterns_.
+  - `any_of< ...Patterns >` matches a type that matches **any** of the 
+_patterns_.
 
-  - `none_of< ...Patterns >` matches a type when said type matches against
-**none** of its _patterns_.
+  - `none_of< ...Patterns >` matches a type that matches **none** of the 
+_patterns_.
 
 ---
 

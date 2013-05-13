@@ -22,7 +22,7 @@ struct is_member_pointer
         >::type type;
     typedef typename at<
             is_member_pointer, _1
-        >::type object_type;
+        >::type member_type;
     typedef typename at<
             is_member_pointer, _2
         >::type class_type;
@@ -43,7 +43,7 @@ int main()
     std::cout
      << "is_member_pointer: " << std::boolalpha << traits() << "\n"
      << "  class_type: " << typeid(traits::class_type).name() << "\n"
-     << "  object_type: " << typeid(traits::object_type).name() << "\n"
+     << "  member_type: " << typeid(traits::member_type).name() << "\n"
      << std::endl;
 
     static_assert(
