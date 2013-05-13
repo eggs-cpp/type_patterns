@@ -12,6 +12,8 @@
 #ifndef EGGS_TYPE_PATTERNS_MATCH_HPP
 #define EGGS_TYPE_PATTERNS_MATCH_HPP
 
+#include <eggs/type_patterns/match_fwd.hpp>
+
 #include <eggs/type_patterns/detail/match.hpp>
 
 #include <eggs/type_patterns/placeholders.hpp>
@@ -31,9 +33,6 @@ namespace eggs { namespace type_patterns {
         typedef Type source_type;
         typedef Pattern pattern_type;
     };
-
-    template< typename Match, typename Placeholder, typename Enable = void >
-    struct at;
     
     template< typename Match >
     struct at<

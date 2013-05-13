@@ -14,6 +14,7 @@
 
 #include <eggs/type_patterns/detail/match.hpp>
 
+#include <eggs/type_patterns/match_fwd.hpp>
 #include <eggs/type_patterns/metafunction.hpp>
 #include <eggs/type_patterns/placeholders.hpp>
 
@@ -25,14 +26,9 @@ namespace eggs { namespace type_patterns {
     template< typename Placeholder, typename Pattern >
     struct as;
 
-    template< typename Placeholder, typename Pattern >
-    struct is_metafunction< as< Placeholder, Pattern > >
-      : boost::mpl::true_
-    {};
-
     template< int I, typename P, typename T, typename S >
     struct call<
-        as< placeholder< I >, P >, T, S
+        as< placeholder< I >, P >, match_context< T, S >
     > : detail::match_bool<
             detail::match< P, T, S >
           , typename boost::mpl::insert<

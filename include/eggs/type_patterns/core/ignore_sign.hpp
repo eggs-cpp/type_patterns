@@ -14,6 +14,7 @@
 
 #include <eggs/type_patterns/detail/match.hpp>
 
+#include <eggs/type_patterns/match_fwd.hpp>
 #include <eggs/type_patterns/metafunction.hpp>
 
 namespace eggs { namespace type_patterns {
@@ -23,38 +24,33 @@ namespace eggs { namespace type_patterns {
     
     template< typename P, typename T, typename S >
     struct call<
-        ignore_signed< P >, T, S
+        ignore_signed< P >, match_context< T, S >
     > : detail::match< P, T, S >
     {};
     template< typename P, typename S >
     struct call<
-        ignore_signed< P >, signed char, S
+        ignore_signed< P >, match_context< signed char, S >
     > : detail::match< P, char, S >
     {};
     template< typename P, typename S >
     struct call<
-        ignore_signed< P >, signed short, S
+        ignore_signed< P >, match_context< signed short, S >
     > : detail::match< P, short, S >
     {};
     template< typename P, typename S >
     struct call<
-        ignore_signed< P >, signed int, S
+        ignore_signed< P >, match_context< signed int, S >
     > : detail::match< P, int, S >
     {};
     template< typename P, typename S >
     struct call<
-        ignore_signed< P >, signed long, S
+        ignore_signed< P >, match_context< signed long, S >
     > : detail::match< P, long, S >
     {};
     template< typename P, typename S >
     struct call<
-        ignore_signed< P >, signed long long, S
+        ignore_signed< P >, match_context< signed long long, S >
     > : detail::match< P, long long, S >
-    {};
-
-    template< typename Pattern >
-    struct is_metafunction< ignore_signed< Pattern > >
-      : boost::mpl::true_
     {};
     
     template< typename Pattern >
@@ -62,38 +58,33 @@ namespace eggs { namespace type_patterns {
     
     template< typename P, typename T, typename S >
     struct call<
-        ignore_unsigned< P >, T, S
+        ignore_unsigned< P >, match_context< T, S >
     > : detail::match< P, T, S >
     {};
     template< typename P, typename S >
     struct call<
-        ignore_unsigned< P >, unsigned char, S
+        ignore_unsigned< P >, match_context< unsigned char, S >
     > : detail::match< P, char, S >
     {};
     template< typename P, typename S >
     struct call<
-        ignore_unsigned< P >, unsigned short, S
+        ignore_unsigned< P >, match_context< unsigned short, S >
     > : detail::match< P, short, S >
     {};
     template< typename P, typename S >
     struct call<
-        ignore_unsigned< P >, unsigned int, S
+        ignore_unsigned< P >, match_context< unsigned int, S >
     > : detail::match< P, int, S >
     {};
     template< typename P, typename S >
     struct call<
-        ignore_unsigned< P >, unsigned long, S
+        ignore_unsigned< P >, match_context< unsigned long, S >
     > : detail::match< P, long, S >
     {};
     template< typename P, typename S >
     struct call<
-        ignore_unsigned< P >, unsigned long long, S
+        ignore_unsigned< P >, match_context< unsigned long long, S >
     > : detail::match< P, long long, S >
-    {};
-
-    template< typename Pattern >
-    struct is_metafunction< ignore_unsigned< Pattern > >
-      : boost::mpl::true_
     {};
     
     template< typename Pattern >
@@ -101,63 +92,58 @@ namespace eggs { namespace type_patterns {
     
     template< typename P, typename T, typename S >
     struct call<
-        ignore_sign< P >, T, S
+        ignore_sign< P >, match_context< T, S >
     > : detail::match< P, T, S >
     {};
     template< typename P, typename S >
     struct call<
-        ignore_sign< P >, signed char, S
+        ignore_sign< P >, match_context< signed char, S >
     > : detail::match< P, char, S >
     {};
     template< typename P, typename S >
     struct call<
-        ignore_sign< P >, signed short, S
+        ignore_sign< P >, match_context< signed short, S >
     > : detail::match< P, short, S >
     {};
     template< typename P, typename S >
     struct call<
-        ignore_sign< P >, signed int, S
+        ignore_sign< P >, match_context< signed int, S >
     > : detail::match< P, int, S >
     {};
     template< typename P, typename S >
     struct call<
-        ignore_sign< P >, signed long, S
+        ignore_sign< P >, match_context< signed long, S >
     > : detail::match< P, long, S >
     {};
     template< typename P, typename S >
     struct call<
-        ignore_sign< P >, signed long long, S
+        ignore_sign< P >, match_context< signed long long, S >
     > : detail::match< P, long long, S >
     {};
     template< typename P, typename S >
     struct call<
-        ignore_sign< P >, unsigned char, S
+        ignore_sign< P >, match_context< unsigned char, S >
     > : detail::match< P, char, S >
     {};
     template< typename P, typename S >
     struct call<
-        ignore_sign< P >, unsigned short, S
+        ignore_sign< P >, match_context< unsigned short, S >
     > : detail::match< P, short, S >
     {};
     template< typename P, typename S >
     struct call<
-        ignore_sign< P >, unsigned int, S
+        ignore_sign< P >, match_context< unsigned int, S >
     > : detail::match< P, int, S >
     {};
     template< typename P, typename S >
     struct call<
-        ignore_sign< P >, unsigned long, S
+        ignore_sign< P >, match_context< unsigned long, S >
     > : detail::match< P, long, S >
     {};
     template< typename P, typename S >
     struct call<
-        ignore_sign< P >, unsigned long long, S
+        ignore_sign< P >, match_context< unsigned long long, S >
     > : detail::match< P, long long, S >
-    {};
-
-    template< typename Pattern >
-    struct is_metafunction< ignore_sign< Pattern > >
-      : boost::mpl::true_
     {};
 
 } } // namespace eggs::type_patterns

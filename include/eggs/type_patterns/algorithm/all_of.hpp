@@ -14,6 +14,7 @@
 
 #include <eggs/type_patterns/detail/match.hpp>
 
+#include <eggs/type_patterns/match_fwd.hpp>
 #include <eggs/type_patterns/metafunction.hpp>
 
 #include <boost/mpl/if.hpp>
@@ -23,22 +24,17 @@ namespace eggs { namespace type_patterns {
     template< typename ...Patterns >
     struct all_of;
 
-    template< typename ...Patterns >
-    struct is_metafunction< all_of< Patterns... > >
-      : boost::mpl::true_
-    {};
-
     template< typename T, typename S >
     struct call<
-        all_of<>, T, S
+        all_of<>, match_context< T, S >
     > : detail::match_true< S >
     {};
     template< typename P, typename ...PT, typename T, typename S >
     struct call<
-        all_of< P, PT... >, T, S
+        all_of< P, PT... >, match_context< T, S >
     > : boost::mpl::if_<
             detail::match< P, T, S >
-          , call< all_of< PT... >, T, S >
+          , call< all_of< PT... >, match_context< T, S > >
           , detail::match_false< S >
         >::type
     {};

@@ -14,6 +14,7 @@
 
 #include <eggs/type_patterns/detail/match_bool.hpp>
 
+#include <eggs/type_patterns/match_fwd.hpp>
 #include <eggs/type_patterns/metafunction.hpp>
 #include <eggs/type_patterns/placeholders.hpp>
 
@@ -37,8 +38,8 @@ namespace eggs { namespace type_patterns { namespace detail {
     template< typename P, typename T, typename S >
     struct match
       : boost::mpl::if_<
-            is_metafunction< P >
-          , call< P, T, S >
+            is_metafunction< P, match_context< T, S > >
+          , call< P, match_context< T, S > >
           , match_bool<
                 boost::is_same< P, T >
               , S
@@ -153,8 +154,8 @@ namespace eggs { namespace type_patterns { namespace detail {
     struct match<
         U< P... >, U< T... >, S
     > : boost::mpl::if_<
-            is_metafunction< U< P... > >
-          , call< U< P... >, T, S >
+            is_metafunction< U< P... >, match_context< T, S > >
+          , call< U< P... >, match_context< T, S > >
           , match< linear< P... >, linear< T... >, S >
         >::type
     {};
@@ -162,8 +163,8 @@ namespace eggs { namespace type_patterns { namespace detail {
     struct match<
         U< P... >, T, S
     > : boost::mpl::if_<
-            is_metafunction< U< P... > >
-          , call< U< P... >, T, S >
+            is_metafunction< U< P... >, match_context< T, S > >
+          , call< U< P... >, match_context< T, S > >
           , match_false< S >
         >::type
     {};

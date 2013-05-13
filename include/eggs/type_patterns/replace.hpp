@@ -12,6 +12,8 @@
 #ifndef EGGS_TYPE_PATTERNS_REPLACE_HPP
 #define EGGS_TYPE_PATTERNS_REPLACE_HPP
 
+#include <eggs/type_patterns/replace_fwd.hpp>
+
 #include <eggs/type_patterns/detail/replace.hpp>
 
 #include <eggs/type_patterns/placeholders.hpp>

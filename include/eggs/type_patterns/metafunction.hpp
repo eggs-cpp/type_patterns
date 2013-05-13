@@ -15,18 +15,28 @@
 #include <boost/mpl/bool.hpp>
 
 namespace eggs { namespace type_patterns {
-    
-    template< typename T >
-    struct is_metafunction
-      : boost::mpl::false_
-    {};
 
+    template< typename Type, typename Context >
+    struct call
+    {
+        typedef void unspecified_tag;
+    };
+    
     template<
-        typename Metafunction
-      , typename Type, typename State
+        typename Type, typename Context
       , typename Enable = void
     >
-    struct call;
+    struct is_metafunction
+      : boost::mpl::true_
+    {};
+    template<
+        typename Type, typename Context
+    >
+    struct is_metafunction<
+        Type, Context
+      , typename call< Type, Context >::unspecified_tag
+    > : boost::mpl::false_
+    {};
 
 } } // namespace eggs::type_patterns
 

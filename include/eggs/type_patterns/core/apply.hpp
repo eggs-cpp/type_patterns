@@ -13,9 +13,12 @@
 #define EGGS_TYPE_PATTERNS_CORE_APPLY_HPP
 
 #include <eggs/type_patterns/detail/match.hpp>
+#include <eggs/type_patterns/detail/replace.hpp>
 
+#include <eggs/type_patterns/match_fwd.hpp>
 #include <eggs/type_patterns/metafunction.hpp>
 #include <eggs/type_patterns/placeholders.hpp>
+#include <eggs/type_patterns/replace_fwd.hpp>
 
 #include <boost/mpl/at.hpp>
 #include <boost/mpl/identity.hpp>
@@ -25,11 +28,6 @@ namespace eggs { namespace type_patterns {
 
     template< typename Function >
     struct apply;
-
-    template< typename Function >
-    struct is_metafunction< apply< Function > >
-      : boost::mpl::true_
-    {};
 
     template< typename T >
     struct protect;
@@ -67,8 +65,17 @@ namespace eggs { namespace type_patterns {
 
     template< template< typename... > class F, typename ...FP, typename T, typename S >
     struct call<
-        apply< F< FP... > >, T, S
+        apply< F< FP... > >, match_context< T, S >
     > : detail::match_bool<
+            typename detail::apply_eval< F< FP... >, T, S >::type
+          , S
+        >
+    {};
+    
+    template< template< typename... > class F, typename ...FP, typename T, typename S >
+    struct call<
+        apply< F< FP... > >, replace_context< T, S >
+    > : detail::replace_type<
             typename detail::apply_eval< F< FP... >, T, S >::type
           , S
         >

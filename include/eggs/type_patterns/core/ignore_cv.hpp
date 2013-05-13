@@ -14,6 +14,7 @@
 
 #include <eggs/type_patterns/detail/match.hpp>
 
+#include <eggs/type_patterns/match_fwd.hpp>
 #include <eggs/type_patterns/metafunction.hpp>
 
 namespace eggs { namespace type_patterns {
@@ -23,18 +24,13 @@ namespace eggs { namespace type_patterns {
     
     template< typename P, typename T, typename S >
     struct call<
-        ignore_const< P >, T, S
+        ignore_const< P >, match_context< T, S >
     > : detail::match< P, T, S >
     {};
     template< typename P, typename T, typename S >
     struct call<
-        ignore_const< P >, T const, S
+        ignore_const< P >, match_context< T const, S >
     > : detail::match< P, T, S >
-    {};
-
-    template< typename P >
-    struct is_metafunction< ignore_const< P > >
-      : boost::mpl::true_
     {};
     
     template< typename Pattern >
@@ -42,18 +38,13 @@ namespace eggs { namespace type_patterns {
     
     template< typename P, typename T, typename S >
     struct call<
-        ignore_volatile< P >, T, S
+        ignore_volatile< P >, match_context< T, S >
     > : detail::match< P, T, S >
     {};
     template< typename P, typename T, typename S >
     struct call<
-        ignore_volatile< P >, T volatile, S
+        ignore_volatile< P >, match_context< T volatile, S >
     > : detail::match< P, T, S >
-    {};
-
-    template< typename P >
-    struct is_metafunction< ignore_volatile< P > >
-      : boost::mpl::true_
     {};
     
     template< typename Pattern >
@@ -61,28 +52,23 @@ namespace eggs { namespace type_patterns {
     
     template< typename P, typename T, typename S >
     struct call<
-        ignore_cv< P >, T, S
+        ignore_cv< P >, match_context< T, S >
     > : detail::match< P, T, S >
     {};
     template< typename P, typename T, typename S >
     struct call<
-        ignore_cv< P >, T const, S
+        ignore_cv< P >, match_context< T const, S >
     > : detail::match< P, T, S >
     {};
     template< typename P, typename T, typename S >
     struct call<
-        ignore_cv< P >, T volatile, S
+        ignore_cv< P >, match_context< T volatile, S >
     > : detail::match< P, T, S >
     {};
     template< typename P, typename T, typename S >
     struct call<
-        ignore_cv< P >, T const volatile, S
+        ignore_cv< P >, match_context< T const volatile, S >
     > : detail::match< P, T, S >
-    {};
-
-    template< typename P >
-    struct is_metafunction< ignore_cv< P > >
-      : boost::mpl::true_
     {};
 
 } } // namespace eggs::type_patterns

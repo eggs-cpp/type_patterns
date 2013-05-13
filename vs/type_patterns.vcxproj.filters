@@ -84,6 +84,12 @@
     <ClInclude Include="..\include\eggs\type_patterns\core\ignore_sign.hpp">
       <Filter>eggs\type_patterns\core</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\eggs\type_patterns\match_fwd.hpp">
+      <Filter>eggs\type_patterns</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\eggs\type_patterns\replace_fwd.hpp">
+      <Filter>eggs\type_patterns</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\LICENSE_1_0.txt" />

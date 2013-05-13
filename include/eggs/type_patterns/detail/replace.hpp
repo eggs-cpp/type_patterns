@@ -16,6 +16,7 @@
 
 #include <eggs/type_patterns/metafunction.hpp>
 #include <eggs/type_patterns/placeholders.hpp>
+#include <eggs/type_patterns/replace_fwd.hpp>
 
 #include <boost/mpl/at.hpp>
 
@@ -28,8 +29,8 @@ namespace eggs { namespace type_patterns { namespace detail {
     template< typename P, typename T, typename S >
     struct replace
       : boost::mpl::if_<
-            is_metafunction< P >
-          , call< P, T, S >
+            is_metafunction< P, replace_context< T, S > >
+          , call< P, replace_context< T, S > >
           , replace_type< P, S >
         >::type
     {};
@@ -164,8 +165,8 @@ namespace eggs { namespace type_patterns { namespace detail {
     struct replace<
         U< P... >, T, S
     > : boost::mpl::if_<
-            is_metafunction< U< P... > >
-          , call< U< P... >, T, S >
+            is_metafunction< U< P... >, replace_context< T, S > >
+          , call< U< P... >, replace_context< T, S > >
           , replace_type< U< typename replace< P, T, S >::type... >, S >
         >::type
     {};
