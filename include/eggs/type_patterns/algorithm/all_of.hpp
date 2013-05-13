@@ -23,8 +23,8 @@ namespace eggs { namespace type_patterns {
     template< typename ...Patterns >
     struct all_of;
 
-    template<>
-    struct is_metafunction< all_of >
+    template< typename ...Patterns >
+    struct is_metafunction< all_of< Patterns... > >
       : boost::mpl::true_
     {};
 

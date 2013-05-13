@@ -26,25 +26,24 @@
 
 #include <boost/type_traits/is_same.hpp>
 
-#include <boost/utility/enable_if.hpp>
-
 namespace eggs { namespace type_patterns { namespace detail {
 
-    template<
-        typename Pattern, typename Type, typename State
-      , typename Enable = void
-    >
+    template< typename Pattern, typename Type, typename State >
     struct match;
 
     template< typename ...T > struct linear;
     
     // terminal
-    template< typename P, typename T, typename S, typename E >
+    template< typename P, typename T, typename S >
     struct match
-      : match_bool<
-            boost::is_same< P, T >
-          , S
-        >
+      : boost::mpl::if_<
+            is_metafunction< P >
+          , call< P, T, S >
+          , match_bool<
+                boost::is_same< P, T >
+              , S
+            >
+        >::type
     {};
 
     // placeholders
@@ -52,33 +51,26 @@ namespace eggs { namespace type_patterns { namespace detail {
     struct match<
         _, T, S
     > : match_true< S >
-    {};
+    {};    
     template< int P, typename T, typename S >
     struct match<
         placeholder< P >, T, S
-      , typename boost::enable_if_c<
-            P != 0 && !boost::mpl::has_key< S, placeholder< P > >::type::value
-        >::type
-    > : match_true<
-            typename boost::mpl::insert<
-                S
-              , boost::mpl::pair< placeholder< P >, T >
-            >::type
-        >
-    {};
-    template< int P, typename T, typename S >
-    struct match<
-        placeholder< P >, T, S
-      , typename boost::enable_if_c<
-            P != 0 && boost::mpl::has_key< S, placeholder< P > >::type::value
-        >::type
-    > : match_bool<
-            boost::is_same<
-                typename boost::mpl::at< S, placeholder< P > >::type
-              , T
+    > : boost::mpl::if_<
+            boost::mpl::has_key< S, placeholder< P > >
+          , match_bool<
+                boost::is_same<
+                    typename boost::mpl::at< S, placeholder< P > >::type
+                  , T
+                >
+              , S
             >
-          , S
-        >
+          , match_true<
+                typename boost::mpl::insert<
+                    S
+                  , boost::mpl::pair< placeholder< P >, T >
+                >::type
+            >
+        >::type
     {};
 
     // cv-qualifiers
@@ -160,18 +152,20 @@ namespace eggs { namespace type_patterns { namespace detail {
     template< template< typename... > class U, typename ...P, typename ...T, typename S >
     struct match<
         U< P... >, U< T... >, S
-      , typename boost::disable_if<
-            is_metafunction< U >
+    > : boost::mpl::if_<
+            is_metafunction< U< P... > >
+          , call< U< P... >, T, S >
+          , match< linear< P... >, linear< T... >, S >
         >::type
-    > : match< linear< P... >, linear< T... >, S >
     {};
-    template< template< typename... > class P, typename ...PA, typename T, typename S >
+    template< template< typename... > class U, typename ...P, typename T, typename S >
     struct match<
-        P< PA... >, T, S
-      , typename boost::enable_if<
-            is_metafunction< P >
+        U< P... >, T, S
+    > : boost::mpl::if_<
+            is_metafunction< U< P... > >
+          , call< U< P... >, T, S >
+          , match_false< S >
         >::type
-    > : call< P< PA... >, T, S >
     {};
 
     // linear match

@@ -19,23 +19,19 @@
 
 #include <boost/mpl/at.hpp>
 
-#include <boost/utility/enable_if.hpp>
-
 namespace eggs { namespace type_patterns { namespace detail {
 
-    template<
-        typename Pattern, typename Type, typename State
-      , typename Enable = void
-    >
+    template< typename Pattern, typename Type, typename State >
     struct replace;
     
     // terminal
-    template< typename P, typename T, typename S, typename E >
+    template< typename P, typename T, typename S >
     struct replace
-      : replace_type<
-            P
-          , S
-        >
+      : boost::mpl::if_<
+            is_metafunction< P >
+          , call< P, T, S >
+          , replace_type< P, S >
+        >::type
     {};
 
     // placeholders
@@ -162,28 +158,16 @@ namespace eggs { namespace type_patterns { namespace detail {
           , S
         >
     {};
-
+    
     // templates
     template< template< typename... > class U, typename ...P, typename T, typename S >
     struct replace<
         U< P... >, T, S
-      , typename boost::disable_if<
-            is_metafunction< U >
+    > : boost::mpl::if_<
+            is_metafunction< U< P... > >
+          , call< U< P... >, T, S >
+          , replace_type< U< typename replace< P, T, S >::type... >, S >
         >::type
-    > : replace_type<
-            U<
-                typename replace< P, T, S >::type...
-            >
-          , S
-        >
-    {};
-    template< template< typename... > class P, typename ...PA, typename T, typename S >
-    struct replace<
-        P< PA... >, T, S
-      , typename boost::enable_if<
-            is_metafunction< P >
-        >::type
-    > : call< P< PA... >, T, S >
     {};
 
 } } } // namespace eggs::type_patterns::detail

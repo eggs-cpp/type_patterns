@@ -23,11 +23,11 @@
 
 namespace eggs { namespace type_patterns {
 
-    template< typename Predicate >
+    template< typename Function >
     struct apply;
 
-    template<>
-    struct is_metafunction< apply >
+    template< typename Function >
+    struct is_metafunction< apply< Function > >
       : boost::mpl::true_
     {};
 

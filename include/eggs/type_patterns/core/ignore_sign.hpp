@@ -52,8 +52,8 @@ namespace eggs { namespace type_patterns {
     > : detail::match< P, long long, S >
     {};
 
-    template<>
-    struct is_metafunction< ignore_signed >
+    template< typename Pattern >
+    struct is_metafunction< ignore_signed< Pattern > >
       : boost::mpl::true_
     {};
     
@@ -91,8 +91,8 @@ namespace eggs { namespace type_patterns {
     > : detail::match< P, long long, S >
     {};
 
-    template<>
-    struct is_metafunction< ignore_unsigned >
+    template< typename Pattern >
+    struct is_metafunction< ignore_unsigned< Pattern > >
       : boost::mpl::true_
     {};
     
@@ -155,8 +155,8 @@ namespace eggs { namespace type_patterns {
     > : detail::match< P, long long, S >
     {};
 
-    template<>
-    struct is_metafunction< ignore_sign >
+    template< typename Pattern >
+    struct is_metafunction< ignore_sign< Pattern > >
       : boost::mpl::true_
     {};
 

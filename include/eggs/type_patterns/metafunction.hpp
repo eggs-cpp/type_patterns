@@ -16,7 +16,7 @@
 
 namespace eggs { namespace type_patterns {
     
-    template< template< typename ... > class T >
+    template< typename T >
     struct is_metafunction
       : boost::mpl::false_
     {};

@@ -32,8 +32,8 @@ namespace eggs { namespace type_patterns {
     > : detail::match< P, T, S >
     {};
 
-    template<>
-    struct is_metafunction< ignore_const >
+    template< typename P >
+    struct is_metafunction< ignore_const< P > >
       : boost::mpl::true_
     {};
     
@@ -51,8 +51,8 @@ namespace eggs { namespace type_patterns {
     > : detail::match< P, T, S >
     {};
 
-    template<>
-    struct is_metafunction< ignore_volatile >
+    template< typename P >
+    struct is_metafunction< ignore_volatile< P > >
       : boost::mpl::true_
     {};
     
@@ -80,8 +80,8 @@ namespace eggs { namespace type_patterns {
     > : detail::match< P, T, S >
     {};
 
-    template<>
-    struct is_metafunction< ignore_cv >
+    template< typename P >
+    struct is_metafunction< ignore_cv< P > >
       : boost::mpl::true_
     {};
 

@@ -25,8 +25,8 @@ namespace eggs { namespace type_patterns {
     template< typename Placeholder, typename Pattern >
     struct as;
 
-    template<>
-    struct is_metafunction< as >
+    template< typename Placeholder, typename Pattern >
+    struct is_metafunction< as< Placeholder, Pattern > >
       : boost::mpl::true_
     {};
 
