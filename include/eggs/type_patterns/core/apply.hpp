@@ -31,6 +31,9 @@ namespace eggs { namespace type_patterns {
       : boost::mpl::true_
     {};
 
+    template< typename T >
+    struct protect;
+
     namespace detail {
 
         template< typename P, typename T, typename S >
@@ -46,6 +49,11 @@ namespace eggs { namespace type_patterns {
         struct apply_eval<
             placeholder< P >, T, S
         > : boost::mpl::at< S, placeholder< P > >
+        {};
+        template< typename P, typename T, typename S >
+        struct apply_eval<
+            protect< P >, T, S
+        > : boost::mpl::identity< P >
         {};
         template< template< typename... > class F, typename ...FP, typename T, typename S >
         struct apply_eval<
